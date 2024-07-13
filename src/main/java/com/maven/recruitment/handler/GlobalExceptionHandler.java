@@ -1,5 +1,7 @@
 package com.maven.recruitment.handler;
 
+import com.maven.recruitment.exception.LoginException;
+import com.maven.recruitment.exception.UpdateException;
 import com.maven.recruitment.pojo.vo.StatusVo;
 import com.maven.recruitment.result.Result;
 import com.maven.recruitment.constant.HttpStatusConstant;
@@ -19,15 +21,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
     @ExceptionHandler
     public ResponseEntity exceptionHandler(BaseException ex){
-        //处理简历信息填写失败异常
-        if(ex instanceof BaseException){
+        //处理上传信息填写失败异常
+        if(ex instanceof UpdateException){
             log.info("信息填写失败:{}",ex.getMessage());
             StatusVo statusVo = StatusVo.builder()
                     .status(0)
                     .message(ex.getMessage())
                     .build();
             return new ResponseEntity(Result.error(MessageConstant.ADD_ERROR, HttpStatusConstant.BAD_REQUEST, statusVo), HttpStatus.BAD_REQUEST);
-        } else if (ex instanceof BaseException) {
+        } else if (ex instanceof LoginException) {
             log.info("信息填写失败:{}",ex.getMessage());
             StatusVo statusVo = StatusVo.builder()
                     .status(0)

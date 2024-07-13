@@ -4,7 +4,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/employment_system
+    url: jdbc:mysql://localhost:3306/recruitment
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 102030aoboco
