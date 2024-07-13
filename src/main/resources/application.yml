@@ -1,0 +1,30 @@
+#端口号
+server:
+  port: 6666
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/employment_system
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 102030aoboco
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 6000MB
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: 100
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.commons.JakartaCommonsLoggingImpl
+    map-underscore-to-camel-case: true
