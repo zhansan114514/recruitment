@@ -9,6 +9,11 @@ import org.apache.ibatis.annotations.Select;
 public interface LoginMapper {
 
 
+    /**
+     * 登录用户信息
+     * @param user 用户信息
+     * @return 用户信息
+     */
     @Select("select * from user where username = #{username} and password = #{password}")
     User login(User user);
 
