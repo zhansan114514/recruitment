@@ -3,8 +3,6 @@ package com.maven.recruitment.service;
 
 import com.maven.recruitment.pojo.Info.User;
 
-import javax.security.auth.login.LoginException;
-
 public interface LoginService {
     /**
      * 注册用户信息，

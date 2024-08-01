@@ -23,10 +23,16 @@ public class LoginServiceImpl implements LoginService {
 
         if (user.getUsername() == null
                 || user.getPassword() == null
-                || user.getPhone() == null) {
+                || user.getPhone() == null
+                || user.getEmail() == null
+                || user.getName() == null) {
             throw new LoginException("注册信息不得为空");
         }
         loginMapper.signup(user);
+        loginMapper.signupC(user);
+        loginMapper.signupJava(user);
+        loginMapper.signupPython(user);
+        loginMapper.signupWebsite(user);
         log.info("用户注册成功");
     }
 }

@@ -35,7 +35,7 @@ public class LoginController {
 
             claims.put("username", user.getUsername());
             claims.put("password", user.getPassword());
-            claims.put("phone", user.getPhone());
+            claims.put("name", user.getName());
 
             String jwt = JwtUtils.generateJwt(claims);
             StatusVo statusVo = StatusVo.builder()

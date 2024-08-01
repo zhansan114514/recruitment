@@ -13,6 +13,6 @@ public interface IdMapper {
      * @return 学生id
      */
     @Select("select studentid from user where username = #{username} and password = #{password}")
-    Integer selectId(String username,String password);
+    String selectId(String username,String password);
 
 }

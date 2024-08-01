@@ -25,7 +25,7 @@ public class IdUtils {
      * 通过token获取studentid
      * @return studentid
      */
-    public int getId() {
+    public String getStudentid() {
 
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes()))
                 .getRequest();

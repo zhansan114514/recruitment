@@ -1,6 +1,7 @@
 package com.maven.recruitment.handler;
 
 import com.maven.recruitment.exception.LoginException;
+import com.maven.recruitment.exception.SearchException;
 import com.maven.recruitment.exception.UpdateException;
 import com.maven.recruitment.pojo.vo.StatusVo;
 import com.maven.recruitment.result.Result;
@@ -23,19 +24,26 @@ public class GlobalExceptionHandler {
     public ResponseEntity exceptionHandler(BaseException ex){
         //处理上传信息填写失败异常
         if(ex instanceof UpdateException){
-            log.info("信息填写失败:{}",ex.getMessage());
+            log.info("信息上传失败:{}",ex.getMessage());
             StatusVo statusVo = StatusVo.builder()
                     .status(0)
                     .message(ex.getMessage())
                     .build();
-            return new ResponseEntity(Result.error(MessageConstant.ADD_ERROR, HttpStatusConstant.BAD_REQUEST, statusVo), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(Result.error(MessageConstant.UPDATE_ERROR, HttpStatusConstant.BAD_REQUEST, statusVo), HttpStatus.BAD_REQUEST);
         } else if (ex instanceof LoginException) {
-            log.info("信息填写失败:{}",ex.getMessage());
+            log.info("登录或注册失败:{}",ex.getMessage());
             StatusVo statusVo = StatusVo.builder()
                     .status(0)
                     .message(ex.getMessage())
                     .build();
             return new ResponseEntity(Result.error(MessageConstant.ADD_ERROR, HttpStatusConstant.BAD_REQUEST, statusVo), HttpStatus.BAD_REQUEST);
+        } else if (ex instanceof SearchException) {
+            log.info("查找数据失败:{}",ex.getMessage());
+            StatusVo statusVo = StatusVo.builder()
+                    .status(0)
+                    .message(ex.getMessage())
+                    .build();
+            return new ResponseEntity(Result.error(MessageConstant.SEARCH_ERROR, HttpStatusConstant.BAD_REQUEST, statusVo), HttpStatus.BAD_REQUEST);
         }
 
         //其他业务异常

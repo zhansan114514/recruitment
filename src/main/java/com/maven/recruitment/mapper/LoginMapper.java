@@ -23,4 +23,16 @@ public interface LoginMapper {
      */
     @Insert("insert into user(username, password, email, phone, name, studentid) values(#{username}, #{password}, #{email}, #{phone}, #{name}, #{studentid})")
     void signup(User user);
+
+    @Insert("insert into c方向答题 (studentid, username) values(#{studentid}, #{username})")
+    void signupC(User user);
+
+    @Insert("insert into java方向答题 (studentid, username) values(#{studentid}, #{username})")
+    void signupJava(User user);
+
+    @Insert("insert into 机器学习方向答题 (studentid, username) values(#{studentid}, #{username})")
+    void signupPython(User user);
+
+    @Insert("insert into 前端方向答题 (studentid, username) values(#{studentid}, #{username})")
+    void signupWebsite(User user);
 }
