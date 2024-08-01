@@ -38,7 +38,7 @@ public class CorrectingServiceImpl implements CorrectingService {
         try {
             correctingMapper.insertCdata(cdata);
         } catch (Exception e) {
-            log.error("service: 更新cdata表中的数据失败");
+            log.error("service: 更新cdata表中的数据失败",e);
             throw new UpdateException("更新cdata表中的数据失败");
         }
     }

@@ -12,20 +12,20 @@ public class Cdata {
     String username;
     String name;
     String question1;
-    String score1;
+    int score1;
     String question2;
-    String score2;
+    int score2;
     String question3;
-    String score3;
+    int score3;
     String question4;
-    String score4;
+    int score4;
     String question5;
-    String score5;
+    int score5;
     String question6;
-    String score6;
+    int score6;
     String question7;
-    String score7;
+    int score7;
     String question8;
-    String score8;
+    int score8;
     String total_score;
 }
