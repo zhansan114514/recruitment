@@ -35,4 +35,7 @@ public interface LoginMapper {
 
     @Insert("insert into 前端方向答题 (studentid, username) values(#{studentid}, #{username})")
     void signupWebsite(User user);
+
+    @Select("select * from user where email = #{email}")
+    User selectEmail(String email);
 }

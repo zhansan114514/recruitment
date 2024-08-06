@@ -23,6 +23,18 @@ spring:
           max-idle: 8
           min-idle: 0
           max-wait: 100
+  mail:
+    username: 1727448271@qq.com
+    password: xfjbtleqkdfoeegg
+    host: smtp.qq.com
+    properties:
+      mail:
+        debug: false
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+    default-encoding: utf-8
+    port: 465
 
 mybatis:
   configuration:

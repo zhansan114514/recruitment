@@ -7,6 +7,7 @@ import com.maven.recruitment.result.Result;
 import com.maven.recruitment.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -66,4 +67,14 @@ public class LoginController {
         return Result.success("成功",statusVo);
     }
 
+    @GetMapping("/registercode")
+    public Result<StatusVo> registerCode(String email) {
+        log.info("获取验证码");
+        String code = loginService.registerCode(email);
+        StatusVo statusVo = StatusVo.builder()
+                .status(1)
+                .message(code)
+                .build();
+        return Result.success("成功",statusVo);
+    }
 }
