@@ -8,6 +8,7 @@ import com.maven.recruitment.result.Result;
 import com.maven.recruitment.constant.HttpStatusConstant;
 import com.maven.recruitment.constant.MessageConstant;
 import com.maven.recruitment.exception.BaseException;
+import com.maven.recruitment.exception.MailException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +45,13 @@ public class GlobalExceptionHandler {
                     .message(ex.getMessage())
                     .build();
             return new ResponseEntity(Result.error(MessageConstant.SEARCH_ERROR, HttpStatusConstant.BAD_REQUEST, statusVo), HttpStatus.BAD_REQUEST);
+        } else if (ex instanceof MailException) {
+            log.info("邮件发送失败:{}",ex.getMessage());
+            StatusVo statusVo = StatusVo.builder()
+                    .status(0)
+                    .message(ex.getMessage())
+                    .build();
+            return new ResponseEntity(Result.error(MessageConstant.MAIL_ERROR, HttpStatusConstant.BAD_REQUEST, statusVo), HttpStatus.BAD_REQUEST);
         }
 
         //其他业务异常
