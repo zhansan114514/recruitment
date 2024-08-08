@@ -31,5 +31,6 @@ public class Websitedata {
     int score9;
     String question10;
     int score10;
+    int tests;
     String total_score;
 }

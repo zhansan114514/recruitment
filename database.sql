@@ -20,6 +20,7 @@ create table c方向答题
     score7      int         null comment '第七道题的成绩',
     question8   varchar(50) null comment '问题8',
     score8      int         null comment '第八道题的成绩',
+    tests       int         null comment '过题数',
     total_score int         null comment '总成绩',
     constraint c方向答题_pk_2
         unique (studentid)
@@ -53,6 +54,7 @@ create table Java方向答题
     score10     int         null comment '第十道题的成绩',
     question11  varchar(50) null comment '问题11',
     score11     int         null comment '第十一道题的成绩',
+    tests       int         null comment '过题数',
     total_score int         null comment '总成绩',
     constraint Java方向答题_pk_2
         unique (studentid)
@@ -84,6 +86,7 @@ create table 机器学习方向答题
     score9      int         null comment '第九道题的成绩',
     question10  varchar(50) null comment '问题10',
     score10     int         null comment '第十道题的成绩',
+    tests       int         null comment '过题数',
     total_score int         null comment '总成绩',
     constraint 机器学习方向答题_pk_2
         unique (studentid)
@@ -115,6 +118,7 @@ create table 前端方向答题
     score9      int         null comment '第九道题的成绩',
     question10  varchar(50) null comment '问题10',
     score10     int         null comment '第十道题的成绩',
+    tests       int         null comment '过题数',
     total_score int         null comment '总成绩',
     constraint 前端方向答题_pk_2
         unique (studentid)

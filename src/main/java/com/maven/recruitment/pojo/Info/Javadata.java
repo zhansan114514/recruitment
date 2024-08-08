@@ -33,5 +33,6 @@ public class Javadata {
     int score10;
     String question11;
     int score11;
+    int tests;
     String total_score;
 }

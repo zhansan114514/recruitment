@@ -27,5 +27,6 @@ public class Cdata {
     int score7;
     String question8;
     int score8;
+    int tests;
     String total_score;
 }
