@@ -1,41 +1,47 @@
 package com.maven.recruitment.service;
 
-import com.maven.recruitment.pojo.Info.Cdata;
-import com.maven.recruitment.pojo.vo.RankDataVo;
 
-import java.util.List;
-import java.util.Map;
+import com.maven.recruitment.pojo.vo.RankDataVo;
+import com.maven.recruitment.pojo.vo.SelfGradeVo;
+import cn.hutool.json.JSONObject;
 
 public interface RankService {
 
 
     /**
      * 根据分数给C方向的用户排序
-     * @return C方向用户数据，按分数从高到低排序，包括昵称
+     * @param userId 登录的用户的学号
+     * @return C方向用户数据，按分数从高到低排序，以及用户自身的数据
      */
-    RankDataVo rankC();
-
-    /**
-     * 根据分数给后端方向的用户排序
-     * @return Java用户数据，按分数从高到低排序，包括昵称
-     */
-    RankDataVo rankJava();
+    RankDataVo rankC(String userId);
 
     /**
      * 根据分数给机器学习方向的用户排序
-     * @return C方向用户数据，按分数从高到低排序，包括昵称
+     *  @param userId 登录的用户的学号
+     * @return 机器学习方向用户数据，按分数从高到低排序，以及用户自身的数据
      */
-    RankDataVo rankPython();
+    RankDataVo rankPython(String userId);
 
     /**
      * 根据分数给前端方向的用户排序
-     * @return C方向用户数据，按分数从高到低排序，包括昵称
+     * @param userId 登录的用户的学号
+     * @return 前端方向用户数据，按分数从高到低排序，以及用户自身的数据
      */
-    RankDataVo rankWebsite();
+    RankDataVo rankWebsite(String userId);
+
+    /**
+     * 根据分数给后端方向的用户排序
+     * @param userId 登录的用户的学号
+     * @return Java用户数据，按分数从高到低排序，以及用户自身的数据
+     */
+    RankDataVo rankJava(String userId);
 
     /**
      * 封装各个方向已排序好的用户数据
-     * @return 四个方向的用户数据，按分数从高到低排序，包括昵称
+     * @param userId 登录的用户的学号
+     * @return 四个方向前十名的用户数据，按分数从高到低排序，以及用户自身的数据
      */
-    Map<String,RankDataVo> rankUser();
+    JSONObject rankUser(String userId);
+
+
 }

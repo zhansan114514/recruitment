@@ -88,13 +88,6 @@
             <version>2.3.3</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20231013</version>
-        </dependency>
-
-
         <!--qq邮箱-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
