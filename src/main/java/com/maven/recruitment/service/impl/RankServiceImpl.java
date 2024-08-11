@@ -14,10 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 
 @Slf4j
@@ -28,9 +25,9 @@ public class RankServiceImpl implements RankService {
 
     /*定义SelfGradeVo以存储用户个人数据 */
     SelfGradeVo dataSelf =new SelfGradeVo();
-    int[] place;
-    String[] point;
-    int[] test;
+    int[] place=new int[4];
+    String[] point=new String[4];
+    int[] test=new int[4];
     int how_many=10;
 
     @Override
@@ -52,7 +49,6 @@ public class RankServiceImpl implements RankService {
                 }
                 //获取当前用户数据
                 if(Objects.equals(userId, cdata.getStudentid())){
-                    dataSelf.setName(cdata.getName());
                     place[0]=i+1;
                     point[0]=cdata.getTotal_score();
                     test[0]=cdata.getTests();
@@ -87,7 +83,7 @@ public class RankServiceImpl implements RankService {
                     tests[i]=pythondata.getTests();
                 }
                 if(Objects.equals(userId, pythondata.getStudentid())){
-                    dataSelf.setName(pythondata.getName());
+
                     place[1]=i+1;
                     point[1]=pythondata.getTotal_score();
                     test[1]=pythondata.getTests();
@@ -122,7 +118,6 @@ public class RankServiceImpl implements RankService {
                     tests[i]=websitedata.getTests();
                 }
                 if(Objects.equals(userId, websitedata.getStudentid())){
-                    dataSelf.setName(websitedata.getName());
                     place[2]=i+1;
                     point[2]=websitedata.getTotal_score();
                     test[2]=websitedata.getTests();
@@ -157,10 +152,9 @@ public class RankServiceImpl implements RankService {
                     tests[i]=javadata.getTests();
                 }
                 if(Objects.equals(userId,javadata.getStudentid())){
-                    dataSelf.setName(javadata.getName());
-                    place[2]=i+1;
-                    point[2]=javadata.getTotal_score();
-                    test[2]=javadata.getTests();
+                    place[3]=i+1;
+                    point[3]=javadata.getTotal_score();
+                    test[3]=javadata.getTests();
                 }
             }
             int amount = rankMapper.countUserByJava();
@@ -176,12 +170,16 @@ public class RankServiceImpl implements RankService {
     }
 
     public JSONObject rankUser(String userId){
-        Map<String,Object> dataMap =new HashMap<>();
-            dataMap.put("cs", rankC(userId));
-            dataMap.put("ai", rankPython(userId));
-            dataMap.put("fr", rankWebsite(userId));
-            dataMap.put("ba", rankJava(userId));
-            dataMap.put("self", dataSelf);
+        Map<String,JSONObject> dataMap =new LinkedHashMap<>();
+            dataMap.put("cs",new JSONObject(rankC(userId)));
+            dataMap.put("ai",new JSONObject(rankPython(userId)));
+            dataMap.put("fr",new JSONObject(rankWebsite(userId)));
+            dataMap.put("ba",new JSONObject(rankJava(userId)));
+            dataSelf.setPlace(place);
+            dataSelf.setTest(test);
+            dataSelf.setPoint(point);
+            dataSelf.setName(rankMapper.selectName(userId));
+            dataMap.put("self",new JSONObject(dataSelf));
             return new JSONObject(dataMap);
     }
 

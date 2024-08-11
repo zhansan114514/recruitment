@@ -20,7 +20,6 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
         //获取令牌
         String jwt = req.getHeader("token");
-
         //无令牌显示未登录
         if(!StringUtils.hasLength((jwt))){
             log.info("请求头为空，返回未登录的信息");

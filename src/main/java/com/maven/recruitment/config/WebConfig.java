@@ -19,7 +19,9 @@ public class WebConfig implements WebMvcConfigurer {
                                                       .excludePathPatterns("/signup")
                                                       .excludePathPatterns("/login")
                                                       .excludePathPatterns("/correcting/**")
+                                                      //调试 .excludePathPatterns("/rank")
                                                       .excludePathPatterns("/registercode");
+
     }
 
 }

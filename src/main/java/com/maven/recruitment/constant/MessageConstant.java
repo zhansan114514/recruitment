@@ -10,4 +10,6 @@ public class MessageConstant {
 
     public static final String MAIL_ERROR = "邮件发送失败";
 
+    public static final String Rank_ERROR = "用户排序失败";
+
 }

@@ -1,12 +1,7 @@
 package com.maven.recruitment.mapper;
 
-import com.maven.recruitment.pojo.Info.Cdata;
-import com.maven.recruitment.pojo.Info.Javadata;
-import com.maven.recruitment.pojo.Info.Pythondata;
-import com.maven.recruitment.pojo.Info.Websitedata;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-
+import com.maven.recruitment.pojo.Info.*;
+import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 @Mapper
@@ -40,4 +35,12 @@ public interface RankMapper{
 
     @Select("SELECT COUNT(studentid) FROM 前端方向答题")
     int countUserByWebsite();
+
+    /**
+     * 通过学号查询学生姓名
+     * @param studentid 学号
+     * @return 学生姓名
+     */
+    @Select("select name from user where studentid = #{studentid} ")
+    String selectName(String studentid);
 }
