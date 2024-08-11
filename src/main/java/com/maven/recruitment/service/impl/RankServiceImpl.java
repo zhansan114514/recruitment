@@ -26,7 +26,7 @@ public class RankServiceImpl implements RankService {
     /*定义SelfGradeVo以存储用户个人数据 */
     SelfGradeVo dataSelf =new SelfGradeVo();
     int[] place=new int[4];
-    String[] point=new String[4];
+    int[] point=new int[4];
     int[] test=new int[4];
     int how_many=10;
 
@@ -37,20 +37,20 @@ public class RankServiceImpl implements RankService {
             List<Cdata> rankList=rankMapper.rankUserByC();
             int size=rankList.size();
             String[] names = new String[how_many];
-            String[] points = new String[how_many];
+            int[] points = new int[how_many];
             int[] tests = new int[how_many];
             for (int i = 0; i < size ; i++) {
                 Cdata cdata = rankList.get(i);
                 //获取c方向前十名用户数据
                 if(i<how_many){
                     names[i]=cdata.getUsername();
-                    points[i]=cdata.getTotal_score();
+                    points[i]=cdata.getTotalscore();
                     tests[i]=cdata.getTests();
                 }
                 //获取当前用户数据
                 if(Objects.equals(userId, cdata.getStudentid())){
                     place[0]=i+1;
-                    point[0]=cdata.getTotal_score();
+                    point[0]=cdata.getTotalscore();
                     test[0]=cdata.getTests();
                 }
             }
@@ -73,19 +73,19 @@ public class RankServiceImpl implements RankService {
             List<Pythondata> rankList=rankMapper.rankUserByPython();
             int size=rankList.size();
             String[] names = new String[how_many];
-            String[] points = new String[how_many];
+            int[] points = new int[how_many];
             int[] tests = new int[how_many];
             for (int i = 0; i < size ; i++) {
                 Pythondata pythondata = rankList.get(i);
                 if(i<how_many){
                     names[i]=pythondata.getUsername();
-                    points[i]=pythondata.getTotal_score();
+                    points[i]=pythondata.getTotalscore();
                     tests[i]=pythondata.getTests();
                 }
                 if(Objects.equals(userId, pythondata.getStudentid())){
 
                     place[1]=i+1;
-                    point[1]=pythondata.getTotal_score();
+                    point[1]=pythondata.getTotalscore();
                     test[1]=pythondata.getTests();
                 }
             }
@@ -108,18 +108,18 @@ public class RankServiceImpl implements RankService {
             List<Websitedata> rankList=rankMapper.rankUserByWebsite();
             int size=rankList.size();
             String[] names = new String[how_many];
-            String[] points = new String[how_many];
+            int[] points = new int[how_many];
             int[] tests = new int[how_many];
             for (int i = 0; i < size ; i++) {
                 Websitedata websitedata = rankList.get(i);
                 if(i<how_many){
                     names[i]=websitedata.getUsername();
-                    points[i]=websitedata.getTotal_score();
+                    points[i]=websitedata.getTotalscore();
                     tests[i]=websitedata.getTests();
                 }
                 if(Objects.equals(userId, websitedata.getStudentid())){
                     place[2]=i+1;
-                    point[2]=websitedata.getTotal_score();
+                    point[2]=websitedata.getTotalscore();
                     test[2]=websitedata.getTests();
                 }
             }
@@ -142,18 +142,18 @@ public class RankServiceImpl implements RankService {
             List<Javadata> rankList=rankMapper.rankUserByJava();
             int size=rankList.size();
             String[] names = new String[how_many];
-            String[] points = new String[how_many];
+            int[] points = new int[how_many];
             int[] tests = new int[how_many];
             for (int i = 0; i < size ; i++) {
                 Javadata javadata = rankList.get(i);
                 if(i<how_many){
                     names[i]=javadata.getUsername();
-                    points[i]=javadata.getTotal_score();
+                    points[i]=javadata.getTotalscore();
                     tests[i]=javadata.getTests();
                 }
                 if(Objects.equals(userId,javadata.getStudentid())){
                     place[3]=i+1;
-                    point[3]=javadata.getTotal_score();
+                    point[3]=javadata.getTotalscore();
                     test[3]=javadata.getTests();
                 }
             }

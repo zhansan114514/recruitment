@@ -32,5 +32,5 @@ public class Pythondata {
     String question10;
     int score10;
     int tests;
-    String total_score;
+    int totalscore;
 }

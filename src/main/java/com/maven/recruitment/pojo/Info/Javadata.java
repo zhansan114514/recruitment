@@ -34,5 +34,5 @@ public class Javadata {
     String question11;
     int score11;
     int tests;
-    String total_score;
+    int totalscore;
 }

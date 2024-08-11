@@ -14,6 +14,6 @@ import java.io.Serializable;
 public class SelfGradeVo implements Serializable {
     int[] place;
     String name;
-    String[] point;
+    int[] point;
     int[] test;
 }

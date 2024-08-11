@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Builder
 public class RankDataVo implements Serializable {
     private String[] name;
-    private String[] point;
+    private int[] point;
     private int[] test;
     private int how_many;
     private int amount;

@@ -21,7 +21,7 @@ create table c方向答题
     question8   varchar(50) null comment '问题8',
     score8      int         null comment '第八道题的成绩',
     tests       int         null comment '过题数',
-    total_score int         null comment '总成绩',
+    total_score int         null comment '总成绩' DEFAULT 0,
     constraint c方向答题_pk_2
         unique (studentid)
 )
