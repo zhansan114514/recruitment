@@ -1,11 +1,14 @@
 package com.maven.recruitment.controller;
 
+import com.maven.recruitment.pojo.vo.AllGradeVO;
+import com.maven.recruitment.pojo.vo.ProblemVO;
 import com.maven.recruitment.result.Result;
 import com.maven.recruitment.service.RankService;
 import lombok.extern.slf4j.Slf4j;
 import cn.hutool.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,4 +34,25 @@ public class RankController {
         return Result.success("获取数据成功",dataRank);
     }
 
+    /**
+     * 获取当前用户的成绩
+     * @return
+     */
+    @GetMapping("/problem")
+    public Result<ProblemVO> grade(){
+        log.info("获取用户成绩");
+        ProblemVO problemVO= rankService.grade();
+        log.info("controller:获取用户成绩成功");
+        return Result.success("获取用户成绩成功",problemVO);
+    }
+
+    /**
+     * 获取所有用户的成绩
+     */
+    @GetMapping Result<AllGradeVO> allGrade(){
+        log.info("获取所有用户成绩");
+        AllGradeVO allGradeVO=rankService.allGrade();
+        log.info("controller:获取所有用户成绩成功");
+        return Result.success("获取用户成绩成功",allGradeVO);
+    }
 }

@@ -1,7 +1,10 @@
 package com.maven.recruitment.mapper;
 
+import com.maven.recruitment.Utills.IdUtils;
 import com.maven.recruitment.pojo.Info.*;
 import org.apache.ibatis.annotations.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 @Mapper
@@ -38,4 +41,15 @@ public interface CorrectingMapper {
             "set score1 = #{score1}, score2 = #{score2}, score3 = #{score3}, score4 = #{score4}, score5 = #{score5}, score6 = #{score6}, score7 = #{score7}, score8 = #{score8}, score9 = #{score9}, score10 = #{score10}, total_score = #{total_score} " +
             "where studentid = #{studentid}")
     void insertWebsitedata(Websitedata websitedata);
+
+    @Update("update ${field} "+
+            "set question${id} = #{url} "+
+            "where studentid = #{studentId}"
+    )
+    void insertURL(submitDTO dto);
+
+    @Update("update ${field} " +
+            "set score${id} = #{score} " +
+            "where studentid = #{studentid}")
+    void updateScore(String studentid,String field,int id,int score);
 }

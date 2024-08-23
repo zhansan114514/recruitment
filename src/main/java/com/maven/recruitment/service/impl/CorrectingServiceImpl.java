@@ -1,12 +1,10 @@
 package com.maven.recruitment.service.impl;
 
+import com.maven.recruitment.Utills.IdUtils;
 import com.maven.recruitment.exception.SearchException;
 import com.maven.recruitment.exception.UpdateException;
 import com.maven.recruitment.mapper.CorrectingMapper;
-import com.maven.recruitment.pojo.Info.Cdata;
-import com.maven.recruitment.pojo.Info.Javadata;
-import com.maven.recruitment.pojo.Info.Pythondata;
-import com.maven.recruitment.pojo.Info.Websitedata;
+import com.maven.recruitment.pojo.Info.*;
 import com.maven.recruitment.service.CorrectingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,8 @@ public class CorrectingServiceImpl implements CorrectingService {
 
     @Autowired
     private CorrectingMapper correctingMapper;
+    @Autowired
+    IdUtils idUtils;
 
     @Override
     public List<Cdata> CCorrectingService() {
@@ -107,5 +107,29 @@ public class CorrectingServiceImpl implements CorrectingService {
             log.error("service: 更新websitedata表中的数据失败");
             throw new UpdateException("更新websitedata表中的数据失败");
         }
+    }
+
+    @Override
+    public void submit(submitDTO dto) {
+        log.info("service: 提交链接");
+        dto.setStudentId(idUtils.getStudentid());
+
+
+        if(dto.getField()=="c"){
+            dto.setField("c方向答题");
+        }
+        else if(dto.getField()=="java"){
+            dto.setField("java方向答题");
+        }
+        else if(dto.getField()=="web"){
+            dto.setField("前端方向答题");
+        }
+        else if(dto.getField()=="ml"){
+            dto.setField("机器学习方向答题");
+        }
+
+        //把分数置为0，表示已提交，未批改
+        correctingMapper.updateScore(dto.getStudentId(),dto.getField(),dto.getId(),0);
+        correctingMapper.insertURL(dto);
     }
 }
