@@ -15,4 +15,6 @@ public interface IdMapper {
     @Select("select studentid from user where username = #{username} and password = #{password}")
     String selectId(String username,String password);
 
+    @Select("select name from user where studentid = #{id}")
+    String selectName(String id);
 }

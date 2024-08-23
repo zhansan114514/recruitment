@@ -3,11 +3,14 @@ package com.maven.recruitment.service.impl;
 import cn.hutool.json.JSONObject;
 import com.maven.recruitment.Utills.IdUtils;
 import com.maven.recruitment.exception.RankException;
+import com.maven.recruitment.mapper.IdMapper;
 import com.maven.recruitment.mapper.RankMapper;
 import com.maven.recruitment.pojo.Info.Cdata;
 import com.maven.recruitment.pojo.Info.Javadata;
 import com.maven.recruitment.pojo.Info.Pythondata;
 import com.maven.recruitment.pojo.Info.Websitedata;
+import com.maven.recruitment.pojo.vo.AllGradeVO;
+import com.maven.recruitment.pojo.vo.ProblemVO;
 import com.maven.recruitment.pojo.vo.RankDataVo;
 import com.maven.recruitment.pojo.vo.SelfGradeVo;
 import com.maven.recruitment.service.RankService;
@@ -23,7 +26,11 @@ import java.util.*;
 public class RankServiceImpl implements RankService {
     @Autowired
     private RankMapper rankMapper;
-    //private IdUtils idUtils;
+    @Autowired
+    IdUtils idUtils;
+    @Autowired
+    private IdMapper idMapper;
+
     /*定义SelfGradeVo以存储用户个人数据 */
     SelfGradeVo dataSelf =new SelfGradeVo();
     int[] place=new int[4];
@@ -171,8 +178,6 @@ public class RankServiceImpl implements RankService {
     }
 
     public JSONObject rankUser(String userId){
-
-        //String userId = idUtils.getStudentid();
         Map<String,JSONObject> dataMap =new LinkedHashMap<>();
             dataMap.put("cs",new JSONObject(rankC(userId)));
             dataMap.put("ai",new JSONObject(rankPython(userId)));
@@ -186,5 +191,61 @@ public class RankServiceImpl implements RankService {
             return new JSONObject(dataMap);
     }
 
+    /**
+     * 返回用户成绩
+     * @return
+     */
+    @Override
+    public ProblemVO grade() {
+        int[] c=new int[8];
+        int[] java=new int[11];
+        int[] web=new int[10];
+        int[] ml=new int[10];
+        List<Integer> grades=rankMapper.selectGrade(idUtils.getStudentid(),"c方向答题");
+        for(int i=0;i<8;++i) {
+            c[i] = grades.get(i);
+        }
 
+        grades=rankMapper.selectGrade(idUtils.getStudentid(),"java方向答题");
+        for(int i=0;i<11;++i) {
+            java[i] = grades.get(i);
+        }
+
+        grades=rankMapper.selectGrade(idUtils.getStudentid(),"前端方向答题");
+        for(int i=0;i<10;++i) {
+            web[i] = grades.get(i);
+        }
+
+        grades=rankMapper.selectGrade(idUtils.getStudentid(),"机器学习方向答题");
+        for(int i=0;i<10;++i) {
+            ml[i] = grades.get(i);
+        }
+
+        return new ProblemVO(c,java,web,ml);
+    }
+
+    @Override
+    public AllGradeVO allGrade() {
+        AllGradeVO allGradeVO=new AllGradeVO();
+        allGradeVO.setStudenid(idUtils.getStudentid());
+        allGradeVO.setName(idMapper.selectName(idUtils.getStudentid()));
+
+        List<Integer> grade = rankMapper.selectGrade(allGradeVO.getStudenid(),"c方向答题");
+        List<String> url= rankMapper.selectUrl(allGradeVO.getStudenid(),"c方向答题");
+        allGradeVO.setC(url.toArray(new String[url.size()]),grade.toArray(new Integer[grade.size()]));
+
+        grade = rankMapper.selectGrade(allGradeVO.getStudenid(),"java方向答题");
+        url= rankMapper.selectUrl(allGradeVO.getStudenid(),"java方向答题");
+        allGradeVO.setJava(url.toArray(new String[url.size()]),grade.toArray(new Integer[grade.size()]));
+
+        grade = rankMapper.selectGrade(allGradeVO.getStudenid(),"前端方向答题");
+        url= rankMapper.selectUrl(allGradeVO.getStudenid(),"前端方向答题");
+        allGradeVO.setWeb(url.toArray(new String[url.size()]),grade.toArray(new Integer[grade.size()]));
+
+        grade = rankMapper.selectGrade(allGradeVO.getStudenid(),"机器学习方向答题");
+        url= rankMapper.selectUrl(allGradeVO.getStudenid(),"机器学习方向答题");
+        allGradeVO.setMl(url.toArray(new String[url.size()]),grade.toArray(new Integer[grade.size()]));
+
+        return allGradeVO;
+    }
 }

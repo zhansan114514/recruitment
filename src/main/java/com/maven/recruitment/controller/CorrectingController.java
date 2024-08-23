@@ -144,4 +144,15 @@ public class CorrectingController {
         log.info("修改数据成功");
         return Result.success("修改数据成功", statusVo);
     }
+
+    @PostMapping("/problem")
+    public Result<StatusVo> submit(@RequestBody submitDTO dto){
+        log.info("controller:提交答案");
+        correctingService.submit(dto);
+        StatusVo statusVo=StatusVo.builder()
+                .status(1)
+                .message("提交链接成功")
+                .build();
+        return Result.success("提交链接成功",statusVo);
+    }
 }
