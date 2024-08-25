@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 返回用户答题成绩
@@ -14,8 +15,5 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class ProblemVO implements Serializable {
-    private int[] c;
-    private int[] java;
-    private int[] web;
-    private int[] ml;
+    private List<Integer> c,java,web,ml;
 }

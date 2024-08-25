@@ -197,29 +197,19 @@ public class RankServiceImpl implements RankService {
      */
     @Override
     public ProblemVO grade() {
-        int[] c=new int[8];
-        int[] java=new int[11];
-        int[] web=new int[10];
-        int[] ml=new int[10];
-        List<Integer> grades=rankMapper.selectGrade(idUtils.getStudentid(),"c方向答题");
-        for(int i=0;i<8;++i) {
-            c[i] = grades.get(i);
-        }
+//        int[] c=new int[8];
+//        int[] java=new int[11];
+//        int[] web=new int[10];
+//        int[] ml=new int[10];
+        List<Integer> c,java,web,ml;
+        c=rankMapper.selectGrade(idUtils.getStudentid(),"c方向答题");
 
-        grades=rankMapper.selectGrade(idUtils.getStudentid(),"java方向答题");
-        for(int i=0;i<11;++i) {
-            java[i] = grades.get(i);
-        }
+        java=rankMapper.selectGrade(idUtils.getStudentid(),"java方向答题");
 
-        grades=rankMapper.selectGrade(idUtils.getStudentid(),"前端方向答题");
-        for(int i=0;i<10;++i) {
-            web[i] = grades.get(i);
-        }
+        web=rankMapper.selectGrade(idUtils.getStudentid(),"前端方向答题");
 
-        grades=rankMapper.selectGrade(idUtils.getStudentid(),"机器学习方向答题");
-        for(int i=0;i<10;++i) {
-            ml[i] = grades.get(i);
-        }
+
+        ml=rankMapper.selectGrade(idUtils.getStudentid(),"机器学习方向答题");
 
         return new ProblemVO(c,java,web,ml);
     }
