@@ -1,9 +1,6 @@
 package com.maven.recruitment.service;
 
-import com.maven.recruitment.pojo.Info.Cdata;
-import com.maven.recruitment.pojo.Info.Javadata;
-import com.maven.recruitment.pojo.Info.Pythondata;
-import com.maven.recruitment.pojo.Info.Websitedata;
+import com.maven.recruitment.pojo.Info.*;
 
 import java.util.List;
 
@@ -56,4 +53,11 @@ public interface CorrectingService {
      * @param websitedata 传入的websitedata对象
      */
     void WebsiteCorrectingService(Websitedata websitedata);
+
+    /**
+     * 提交题解（github链接）
+     * @param dto
+     */
+    void submit(submitDTO dto);
+
 }

@@ -1,6 +1,8 @@
 package com.maven.recruitment.service;
 
 
+import com.maven.recruitment.pojo.vo.AllGradeVO;
+import com.maven.recruitment.pojo.vo.ProblemVO;
 import com.maven.recruitment.pojo.vo.RankDataVo;
 import com.maven.recruitment.pojo.vo.SelfGradeVo;
 import cn.hutool.json.JSONObject;
@@ -43,5 +45,11 @@ public interface RankService {
      */
     JSONObject rankUser(String userId);
 
+    /**
+     * 返回用户成绩
+     * @return
+     */
+    ProblemVO grade();
 
+    AllGradeVO allGrade();
 }
