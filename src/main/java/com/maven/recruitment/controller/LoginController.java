@@ -7,16 +7,14 @@ import com.maven.recruitment.result.Result;
 import com.maven.recruitment.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class LoginController {
 
     @Autowired
@@ -36,7 +34,7 @@ public class LoginController {
 
             claims.put("username", user.getUsername());
             claims.put("password", user.getPassword());
-            claims.put("name", user.getName());
+            claims.put("studentid", user.getStudentid());
 
             String jwt = JwtUtils.generateJwt(claims);
             StatusVo statusVo = StatusVo.builder()

@@ -21,7 +21,7 @@ public interface LoginMapper {
      * 注册用户信息，
      * @param user 用户信息
      */
-    @Insert("insert into user(username, password, email, phone, name, studentid) values(#{username}, #{password}, #{email}, #{phone}, #{name}, #{studentid})")
+    @Insert("insert into user (username, password, email, name, studentid) values(#{username}, #{password}, #{email}, #{name}, #{studentid})")
     void signup(User user);
 
     @Insert("insert into c方向答题 (studentid, username) values(#{studentid}, #{username})")

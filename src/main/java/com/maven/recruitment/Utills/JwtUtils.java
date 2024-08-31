@@ -36,6 +36,4 @@ public class JwtUtils {
                 .parseClaimsJws(jwt)
                 .getBody();
     }
-
-
 }

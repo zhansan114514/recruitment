@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -115,16 +116,16 @@ public class CorrectingServiceImpl implements CorrectingService {
         dto.setStudentId(idUtils.getStudentid());
 
 
-        if(dto.getField()=="c"){
+        if(Objects.equals(dto.getField(), "c")){
             dto.setField("c方向答题");
         }
-        else if(dto.getField()=="java"){
+        else if(Objects.equals(dto.getField(), "java")){
             dto.setField("java方向答题");
         }
-        else if(dto.getField()=="web"){
+        else if(Objects.equals(dto.getField(), "web")){
             dto.setField("前端方向答题");
         }
-        else if(dto.getField()=="ml"){
+        else if(Objects.equals(dto.getField(), "ml")){
             dto.setField("机器学习方向答题");
         }
 
