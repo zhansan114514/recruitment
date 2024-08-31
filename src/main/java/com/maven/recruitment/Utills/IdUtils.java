@@ -19,7 +19,7 @@ public class IdUtils {
 
     @Autowired
     private IdMapper idMapper;
-    private static final String signKey = "EmploymentSystem";
+    private static final String signKey = "RecruitmentSystem";
 
     /**
      * 通过token获取studentid
@@ -37,7 +37,7 @@ public class IdUtils {
         Claims claims = claimsJwts.getBody();
         String username = (String) claims.get("username");
         String password = (String) claims.get("password");
-        return idMapper.selectId(username,password);
+        return (String) idMapper.selectId(username,password);
     }
 
 }
