@@ -1,6 +1,7 @@
 package com.maven.recruitment.service.impl;
 
 import cn.hutool.json.JSONObject;
+import com.maven.recruitment.Utills.IdUtils;
 import com.maven.recruitment.exception.RankException;
 import com.maven.recruitment.mapper.RankMapper;
 import com.maven.recruitment.pojo.Info.Cdata;
@@ -22,7 +23,7 @@ import java.util.*;
 public class RankServiceImpl implements RankService {
     @Autowired
     private RankMapper rankMapper;
-
+    //private IdUtils idUtils;
     /*定义SelfGradeVo以存储用户个人数据 */
     SelfGradeVo dataSelf =new SelfGradeVo();
     int[] place=new int[4];
@@ -170,6 +171,8 @@ public class RankServiceImpl implements RankService {
     }
 
     public JSONObject rankUser(String userId){
+
+        //String userId = idUtils.getStudentid();
         Map<String,JSONObject> dataMap =new LinkedHashMap<>();
             dataMap.put("cs",new JSONObject(rankC(userId)));
             dataMap.put("ai",new JSONObject(rankPython(userId)));

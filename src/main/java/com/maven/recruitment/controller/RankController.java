@@ -1,5 +1,6 @@
 package com.maven.recruitment.controller;
 
+import com.maven.recruitment.Utills.IdUtils;
 import com.maven.recruitment.result.Result;
 import com.maven.recruitment.service.RankService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,8 @@ public class RankController {
 
     @Autowired
     RankService rankService;
+    @Autowired
+    IdUtils idUtils;
 
     /**
      * 用户排序
@@ -24,7 +27,8 @@ public class RankController {
      */
 
     @PostMapping("/rank")
-    public Result<JSONObject> rank(String userId){
+    public Result<JSONObject> rank(){
+        String userId = idUtils.getStudentid();
         JSONObject dataRank = rankService.rankUser(userId);
         log.info("controller:获取排序数据");
         log.info("获取排序数据成功");

@@ -38,7 +38,7 @@ public interface RankService {
 
     /**
      * 封装各个方向已排序好的用户数据
-     * @param userId 登录的用户的学号
+     * @param userId 登录的用户id
      * @return 四个方向前十名的用户数据，按分数从高到低排序，以及用户自身的数据
      */
     JSONObject rankUser(String userId);
