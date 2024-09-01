@@ -1,5 +1,8 @@
 DROP database if exists recruitment;
 create database if not exists recruitment;
+drop user if exists 'newuser'@'%';
+CREATE USER 'newuser'@'%' IDENTIFIED BY 'newpassword';
+GRANT ALL PRIVILEGES ON recruitment.* TO 'newuser'@'%';
 use recruitment;
 create table c方向答题
 (
@@ -150,7 +153,6 @@ create table user
     studentid char(30) not null comment '学生id'
         primary key,
     name      char(10) not null comment '姓名',
-    phone     char(20) not null comment '电话号码',
     email     char(25) not null comment '邮箱',
     password  char(25) not null comment '密码',
     username  char(20) not null comment '用户名',
