@@ -21,7 +21,7 @@ public interface CorrectingMapper {
     @Select("select * from recruitment.java方向答题")
     List<Javadata> selectJavadata();
 
-    @Update("update java方向答题 " +
+    @Update("update Java方向答题 " +
             "set score1 = #{score1}, score2 = #{score2}, score3 = #{score3}, score4 = #{score4}, score5 = #{score5}, score6 = #{score6}, score7 = #{score7}, score8 = #{score8}, score9 = #{score9}, score10 = #{score10}, score11 = #{score11}, total_score = #{total_score} " +
             "where studentid = #{studentid}")
     void insertJavadata(Javadata javadata);

@@ -34,10 +34,7 @@ public class IdUtils {
                 .setSigningKey(signKey)
                 .parseClaimsJws(token);
 
-        Claims claims = claimsJwts.getBody();
-        String username = (String) claims.get("username");
-        String password = (String) claims.get("password");
-        return (String) idMapper.selectId(username,password);
+        return (String) claimsJwts.getBody().get("studentid");
     }
 
 }

@@ -27,7 +27,7 @@ public interface LoginMapper {
     @Insert("insert into c方向答题 (studentid, username) values(#{studentid}, #{username})")
     void signupC(User user);
 
-    @Insert("insert into java方向答题 (studentid, username) values(#{studentid}, #{username})")
+    @Insert("insert into Java方向答题 (studentid, username) values(#{studentid}, #{username})")
     void signupJava(User user);
 
     @Insert("insert into 机器学习方向答题 (studentid, username) values(#{studentid}, #{username})")

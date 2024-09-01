@@ -16,7 +16,7 @@ public interface RankMapper{
      */
     @Select("select * from c方向答题 order by c方向答题.total_score desc ")
     List<Cdata> rankUserByC();
-    @Select("select * from java方向答题 order by java方向答题.total_score desc ")
+    @Select("select * from Java方向答题 order by Java方向答题.total_score desc ")
     List<Javadata> rankUserByJava();
     @Select("select * from 机器学习方向答题 order by 机器学习方向答题.total_score desc ")
     List<Pythondata> rankUserByPython();
@@ -30,7 +30,7 @@ public interface RankMapper{
     @Select("SELECT COUNT(studentid) FROM c方向答题")
     int countUserByC();
 
-    @Select("SELECT COUNT(studentid) FROM java方向答题")
+    @Select("SELECT COUNT(studentid) FROM Java方向答题")
     int countUserByJava();
 
     @Select("SELECT COUNT(studentid) FROM 机器学习方向答题")
