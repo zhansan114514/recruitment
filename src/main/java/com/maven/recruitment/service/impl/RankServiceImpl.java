@@ -2,6 +2,7 @@ package com.maven.recruitment.service.impl;
 
 import cn.hutool.json.JSONObject;
 import com.maven.recruitment.Utills.IdUtils;
+import com.maven.recruitment.constant.SQL;
 import com.maven.recruitment.exception.RankException;
 import com.maven.recruitment.mapper.IdMapper;
 import com.maven.recruitment.mapper.RankMapper;
@@ -200,44 +201,51 @@ public class RankServiceImpl implements RankService {
 //        int[] ml=new int[10];
         List<Integer> c,java,web,ml;
         Score score;
-        score=rankMapper.selectGrade(idUtils.getStudentid(),"c方向答题");
+        score=rankMapper.selectGrade(idUtils.getStudentid(),SQL.C_TABLE);
         c=score.toScoreList();
 
-        score=rankMapper.selectGrade(idUtils.getStudentid(),"java方向答题");
+        score=rankMapper.selectGrade(idUtils.getStudentid(),SQL.JAVA_TABLE);
         java=score.toScoreList();
 
-        score=rankMapper.selectGrade(idUtils.getStudentid(),"前端方向答题");
+        score=rankMapper.selectGrade(idUtils.getStudentid(),SQL.WEB_TABLE);
         web=score.toScoreList();
 
-        score=rankMapper.selectGrade(idUtils.getStudentid(),"机器学习方向答题");
+        score=rankMapper.selectGrade(idUtils.getStudentid(),SQL.ML_TABLE);
         ml=score.toScoreList();
 
         return new ProblemVO(c,java,web,ml);
     }
 
     @Override
-    public AllGradeVO allGrade() {
-        AllGradeVO allGradeVO=new AllGradeVO();
-        allGradeVO.setStudenid(idUtils.getStudentid());
-        allGradeVO.setName(idMapper.selectName(idUtils.getStudentid()));
-        Score url,grade;
+    public List<AllGradeVO> allGrade() {
+        int count=idMapper.count();
+        List<AllGradeVO> all=new ArrayList<>();
+        String[] ids=idMapper.selectAllId();
+        for(int i=0;i<count;++i){
+            AllGradeVO allGradeVO=new AllGradeVO();
+            allGradeVO.setStudenid(ids[i]);
+            allGradeVO.setName(idMapper.selectName(ids[i]));
+            Score url,grade;
 
-        grade = rankMapper.selectGrade(allGradeVO.getStudenid(),"c方向答题");
-        url= rankMapper.selectUrl(allGradeVO.getStudenid(),"c方向答题");
-        allGradeVO.setC(url.toUrlList().toArray(new String[url.toUrlList().size()]),grade.toScoreList().toArray(new Integer[grade.toScoreList().size()]));
+            grade = rankMapper.selectGrade(allGradeVO.getStudenid(), SQL.C_TABLE);
+            url= rankMapper.selectUrl(allGradeVO.getStudenid(),SQL.C_TABLE);
+            allGradeVO.setC(url.toUrlList(),grade.toScoreList());
 
-        grade = rankMapper.selectGrade(allGradeVO.getStudenid(),"java方向答题");
-        url= rankMapper.selectUrl(allGradeVO.getStudenid(),"java方向答题");
-        allGradeVO.setJava(url.toUrlList().toArray(new String[url.toUrlList().size()]),grade.toScoreList().toArray(new Integer[grade.toScoreList().size()]));
+            grade = rankMapper.selectGrade(allGradeVO.getStudenid(),SQL.JAVA_TABLE);
+            url= rankMapper.selectUrl(allGradeVO.getStudenid(),SQL.JAVA_TABLE);
+            allGradeVO.setJava(url.toUrlList().toArray(new String[url.toUrlList().size()]),grade.toScoreList().toArray(new Integer[grade.toScoreList().size()]));
 
-        grade = rankMapper.selectGrade(allGradeVO.getStudenid(),"前端方向答题");
-        url= rankMapper.selectUrl(allGradeVO.getStudenid(),"前端方向答题");
-        allGradeVO.setWeb(url.toUrlList().toArray(new String[url.toUrlList().size()]),grade.toScoreList().toArray(new Integer[grade.toScoreList().size()]));
+            grade = rankMapper.selectGrade(allGradeVO.getStudenid(),SQL.WEB_TABLE);
+            url= rankMapper.selectUrl(allGradeVO.getStudenid(),SQL.WEB_TABLE);
+            allGradeVO.setWeb(url.toUrlList().toArray(new String[url.toUrlList().size()]),grade.toScoreList().toArray(new Integer[grade.toScoreList().size()]));
 
-        grade = rankMapper.selectGrade(allGradeVO.getStudenid(),"机器学习方向答题");
-        url= rankMapper.selectUrl(allGradeVO.getStudenid(),"机器学习方向答题");
-        allGradeVO.setMl(url.toUrlList().toArray(new String[url.toUrlList().size()]),grade.toScoreList().toArray(new Integer[grade.toScoreList().size()]));
+            grade = rankMapper.selectGrade(allGradeVO.getStudenid(),SQL.ML_TABLE);
+            url= rankMapper.selectUrl(allGradeVO.getStudenid(),SQL.ML_TABLE);
+            allGradeVO.setMl(url.toUrlList().toArray(new String[url.toUrlList().size()]),grade.toScoreList().toArray(new Integer[grade.toScoreList().size()]));
 
-        return allGradeVO;
+            all.add(allGradeVO);
+        }
+
+        return all;
     }
 }

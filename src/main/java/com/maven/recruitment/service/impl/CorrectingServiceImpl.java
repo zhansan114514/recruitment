@@ -1,6 +1,7 @@
 package com.maven.recruitment.service.impl;
 
 import com.maven.recruitment.Utills.IdUtils;
+import com.maven.recruitment.constant.SQL;
 import com.maven.recruitment.exception.SearchException;
 import com.maven.recruitment.exception.UpdateException;
 import com.maven.recruitment.mapper.CorrectingMapper;
@@ -112,25 +113,43 @@ public class CorrectingServiceImpl implements CorrectingService {
 
     @Override
     public void submit(submitDTO dto) {
-        log.info("service: 提交链接");
+        log.info("service: 提交题解链接");
         dto.setStudentId(idUtils.getStudentid());
 
 
         if(Objects.equals(dto.getField(), "c")){
-            dto.setField("c方向答题");
+            dto.setField(SQL.C_TABLE);
         }
         else if(Objects.equals(dto.getField(), "java")){
-            dto.setField("java方向答题");
+            dto.setField(SQL.JAVA_TABLE);
         }
         else if(Objects.equals(dto.getField(), "web")){
-            dto.setField("前端方向答题");
+            dto.setField(SQL.WEB_TABLE);
         }
         else if(Objects.equals(dto.getField(), "ml")){
-            dto.setField("机器学习方向答题");
+            dto.setField(SQL.ML_TABLE);
         }
 
         //把分数置为0，表示已提交，未批改
+        //TODO 对于历史分数的处理
         correctingMapper.updateScore(dto.getStudentId(),dto.getField(),dto.getId(),0);
         correctingMapper.insertURL(dto);
+    }
+
+    @Override
+    public void updateGrade(UpdateGradeDTO dto) {
+        if(dto.getField().equals("c")){
+            dto.setField(SQL.C_TABLE);
+        }
+        else if(dto.getField().equals("java")){
+            dto.setField(SQL.JAVA_TABLE);
+        }
+        else if(dto.getField().equals("web")){
+            dto.setField(SQL.WEB_TABLE);
+        }
+        else if(dto.getField().equals("ml")){
+            dto.setField(SQL.ML_TABLE);
+        }
+        correctingMapper.updateScore(dto.getStudentid(),dto.getField(),dto.getId(),dto.getScore());
     }
 }

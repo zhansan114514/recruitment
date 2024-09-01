@@ -157,4 +157,16 @@ public class CorrectingController {
                 .build();
         return Result.success("提交链接成功",statusVo);
     }
+
+    @PostMapping("/grade")
+    public Result<StatusVo> updateGrade(@RequestBody UpdateGradeDTO dto){
+        log.info("controller:更改分数");
+        correctingService.updateGrade(dto);
+        StatusVo statusVo=StatusVo.builder()
+                .status(1)
+                .message("修改成绩成功")
+                .build();
+        return Result.success("修改成绩成功",statusVo);
+    }
+
 }

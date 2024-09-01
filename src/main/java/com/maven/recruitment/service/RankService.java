@@ -7,6 +7,8 @@ import com.maven.recruitment.pojo.vo.RankDataVo;
 import com.maven.recruitment.pojo.vo.SelfGradeVo;
 import cn.hutool.json.JSONObject;
 
+import java.util.List;
+
 public interface RankService {
 
 
@@ -51,5 +53,5 @@ public interface RankService {
      */
     ProblemVO grade();
 
-    AllGradeVO allGrade();
+    List<AllGradeVO> allGrade();
 }

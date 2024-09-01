@@ -60,4 +60,8 @@ public interface CorrectingService {
      */
     void submit(submitDTO dto);
 
+    /**
+     * 修改分数
+     */
+    void updateGrade(UpdateGradeDTO dto);
 }

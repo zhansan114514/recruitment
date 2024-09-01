@@ -52,14 +52,12 @@ public interface RankMapper{
      * @param studentid
      * @return 一个方向的成绩的列表
      */
-    @Select("select score1,score2,score3,score4,score5,score6,score7,score8," +
-            "(CASE WHEN score9 IS NOT NULL THEN score9 ELSE -1 END) AS score9," +
-            "(CASE WHEN score10 IS NOT NULL THEN score10 ELSE -1 END) AS score10," +
-            "(CASE WHEN score11 IS NOT NULL THEN score11 ELSE -1 END) AS score11" +
+    @Select("select score1,score2,score3,score4,score5,score6,score7,score8,score9,score10,score11,score12" +
             " from ${field} where studentid=#{studentid}")
     Score selectGrade(String studentid,String field);
-    //TODO 不存在的列处理
-    @Select("select ifnull(question1,-1),ifnull(question2,-1),ifnull(question3,-1),ifnull(question4,-1),ifnull(question5,-1),ifnull(question6,-1),ifnull(question7,-1),ifnull(question8,-1),IFNULL(question9,-1),IFNULL(score10,-1),IFNULL(question11,-1) from ${field} where studentid=#{studentid}")
+
+    @Select("select question1,question2,question3,question4,question5,question6,question7,question8,question9,question10,question11,question12 " +
+            "from ${field} where studentid=#{studentid}")
     Score selectUrl(String studentid,String field);
 
 

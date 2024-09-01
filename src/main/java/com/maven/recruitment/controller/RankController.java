@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Slf4j
 @RestController
@@ -47,10 +49,10 @@ public class RankController {
     /**
      * 获取所有用户的成绩
      */
-    @GetMapping Result<AllGradeVO> allGrade(){
+    @GetMapping("/all") Result<List<AllGradeVO>> allGrade(){
         log.info("获取所有用户成绩");
-        AllGradeVO allGradeVO=rankService.allGrade();
+        List<AllGradeVO> all=rankService.allGrade();
         log.info("controller:获取所有用户成绩成功");
-        return Result.success("获取用户成绩成功",allGradeVO);
+        return Result.success("获取用户成绩成功",all);
     }
 }

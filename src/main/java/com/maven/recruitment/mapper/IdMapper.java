@@ -17,4 +17,10 @@ public interface IdMapper {
 
     @Select("select name from user where studentid = #{id}")
     String selectName(String id);
+
+    @Select("select count(*) from user")
+    int count();
+
+    @Select("select studentid from user")
+    String[] selectAllId();
 }
