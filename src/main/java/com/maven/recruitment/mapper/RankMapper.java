@@ -57,10 +57,10 @@ public interface RankMapper{
             "(CASE WHEN score10 IS NOT NULL THEN score10 ELSE -1 END) AS score10," +
             "(CASE WHEN score11 IS NOT NULL THEN score11 ELSE -1 END) AS score11" +
             " from ${field} where studentid=#{studentid}")
-    List<Integer> selectGrade(String studentid,String field);
+    Score selectGrade(String studentid,String field);
     //TODO 不存在的列处理
     @Select("select ifnull(question1,-1),ifnull(question2,-1),ifnull(question3,-1),ifnull(question4,-1),ifnull(question5,-1),ifnull(question6,-1),ifnull(question7,-1),ifnull(question8,-1),IFNULL(question9,-1),IFNULL(score10,-1),IFNULL(question11,-1) from ${field} where studentid=#{studentid}")
-    List<String> selectUrl(String studentid,String field);
+    Score selectUrl(String studentid,String field);
 
 
 }
