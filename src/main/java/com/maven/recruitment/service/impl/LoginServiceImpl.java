@@ -31,10 +31,18 @@ public class LoginServiceImpl implements LoginService {
 
         if (user.getUsername() == null
                 || user.getPassword() == null
+                || user.getStudentid() == null
                 || user.getEmail() == null
                 || user.getName() == null) {
             throw new LoginException("注册信息不得为空");
         }
+
+        if (loginMapper.selectCode(user.getRegisterCode()) == null) {
+            throw new LoginException("验证码错误");
+        } else {
+            loginMapper.deleteCode(user.getRegisterCode());
+        }
+
         try {
             loginMapper.signup(user);
             loginMapper.signupC(user);
@@ -49,7 +57,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public String registerCode(String email) {
+    public void registerCode(String email) {
         String verifyCode = String.valueOf(new Random().nextInt(899999) + 100000);
         if (loginMapper.selectEmail(email) != null) {
             throw new MailException("该邮箱已被注册");
@@ -64,7 +72,7 @@ public class LoginServiceImpl implements LoginService {
         try {
             mailSender.send(mailMessage);
             log.info("邮件发送成功");
-            return verifyCode;
+            loginMapper.insertCode(verifyCode);
         } catch (Exception e) {
             log.error("邮件发送失败");
             throw new MailException("邮件发送失败,请检查邮箱地址是否正确qwq");

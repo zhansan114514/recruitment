@@ -14,4 +14,5 @@ public class User {
     private String email;
     private String name;
     private String studentid;
+    private String registerCode;
 }

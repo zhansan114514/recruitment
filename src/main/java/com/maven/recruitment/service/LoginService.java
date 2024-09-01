@@ -24,5 +24,5 @@ public interface LoginService {
      * 向该邮箱发送验证码。
      * @param email 邮箱地址
      */
-    String registerCode(String email);
+    void registerCode(String email);
 }

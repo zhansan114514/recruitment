@@ -1,6 +1,7 @@
 package com.maven.recruitment.mapper;
 
 import com.maven.recruitment.pojo.Info.User;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -38,4 +39,13 @@ public interface LoginMapper {
 
     @Select("select * from user where email = #{email}")
     User selectEmail(String email);
+
+    @Insert("insert into registercode (registercode) values(#{registerCode})")
+    void insertCode(String registerCode);
+
+    @Select("select * from registercode where registercode = #{registerCode}")
+    User selectCode(String registerCode);
+
+    @Delete("delete from registercode where registercode = #{registerCode}")
+    void deleteCode(String registerCode);
 }
