@@ -163,3 +163,8 @@ create table user
 )
     comment '保存学生基本信息';
 
+create table registercode
+(
+    registercode char(10) not null comment '验证码'
+)
+    comment '验证码';

@@ -67,7 +67,7 @@ public class LoginServiceImpl implements LoginService {
         mailMessage.setSubject("微光账号注册");
         mailMessage.setText("您的验证码为:" + verifyCode);
         mailMessage.setTo(email);
-        mailMessage.setFrom("1727448271@qq.com");
+        mailMessage.setFrom("glimmer401@outlook.com");
 
         try {
             mailSender.send(mailMessage);
