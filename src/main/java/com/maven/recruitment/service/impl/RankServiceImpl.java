@@ -175,7 +175,8 @@ public class RankServiceImpl implements RankService {
         }
     }
 
-    public JSONObject rankUser(String userId){
+    public JSONObject rankUser(){
+        String userId= idUtils.getStudentid();
         Map<String,JSONObject> dataMap =new LinkedHashMap<>();
             dataMap.put("cs",new JSONObject(rankC(userId)));
             dataMap.put("ai",new JSONObject(rankPython(userId)));

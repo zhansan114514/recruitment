@@ -22,9 +22,6 @@ public class RankController {
     @Autowired
     RankService rankService;
 
-    @Autowired
-    IdUtils idUtils;
-
     /**
      * 用户排序
      * @return 已排好的各个方向的前十名用户数据，包括用户名，分数和过题数,以及本用户的数据
@@ -32,7 +29,7 @@ public class RankController {
 
     @PostMapping("/rank")
     public Result<JSONObject> rank(){
-        JSONObject dataRank = rankService.rankUser(idUtils.getStudentid());
+        JSONObject dataRank = rankService.rankUser();
         log.info("controller:获取排序数据");
         log.info("获取排序数据成功");
         return Result.success("获取数据成功",dataRank);
