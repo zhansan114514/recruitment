@@ -5,6 +5,7 @@ import com.maven.recruitment.constant.SQL;
 import com.maven.recruitment.exception.SearchException;
 import com.maven.recruitment.exception.UpdateException;
 import com.maven.recruitment.mapper.CorrectingMapper;
+import com.maven.recruitment.mapper.RankMapper;
 import com.maven.recruitment.pojo.Info.*;
 import com.maven.recruitment.service.CorrectingService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,8 @@ public class CorrectingServiceImpl implements CorrectingService {
 
     @Autowired
     private CorrectingMapper correctingMapper;
+    @Autowired
+    private RankMapper rankMapper;
     @Autowired
     IdUtils idUtils;
 
@@ -151,5 +154,14 @@ public class CorrectingServiceImpl implements CorrectingService {
             dto.setField(SQL.ML_TABLE);
         }
         correctingMapper.updateScore(dto.getStudentid(),dto.getField(),dto.getId(),dto.getScore());
+        List<Integer> list = rankMapper.selectGrade(dto.getStudentid(), dto.getField()).toScoreList();
+        int total_score = 0;
+        for (int score : list) {
+            if (score >= 0) {
+                total_score += score;
+            }
+        }
+        correctingMapper.updateTotalScore(dto.getStudentid(), dto.getField(), total_score);
+
     }
 }
