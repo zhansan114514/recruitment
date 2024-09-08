@@ -54,7 +54,7 @@ public interface CorrectingMapper {
     void updateScore(String studentid,String field,int id,int score);
 
     @Update("update ${field} " +
-            "set total_score = #{total_score} " +
+            "set total_score = #{total_score},tests = #{tests} " +
             "where studentid = #{studentid}")
-    void updateTotalScore(String studentid,String field,int total_score);
+    void updateTotalScore(String studentid,String field,int tests,int total_score);
 }

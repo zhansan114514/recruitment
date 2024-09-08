@@ -155,13 +155,14 @@ public class CorrectingServiceImpl implements CorrectingService {
         }
         correctingMapper.updateScore(dto.getStudentid(),dto.getField(),dto.getId(),dto.getScore());
         List<Integer> list = rankMapper.selectGrade(dto.getStudentid(), dto.getField()).toScoreList();
-        int total_score = 0;
+        int total_score = 0,tests=0;
         for (int score : list) {
             if (score >= 0) {
                 total_score += score;
+                tests++;
             }
         }
-        correctingMapper.updateTotalScore(dto.getStudentid(), dto.getField(), total_score);
+        correctingMapper.updateTotalScore(dto.getStudentid(), dto.getField(),tests, total_score);
 
     }
 }
