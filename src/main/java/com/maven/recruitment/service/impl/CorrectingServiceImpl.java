@@ -157,7 +157,7 @@ public class CorrectingServiceImpl implements CorrectingService {
         List<Integer> list = rankMapper.selectGrade(dto.getStudentid(), dto.getField()).toScoreList();
         int total_score = 0,tests=0;
         for (int score : list) {
-            if (score >= 0) {
+            if (score > 0) {
                 total_score += score;
                 tests++;
             }
