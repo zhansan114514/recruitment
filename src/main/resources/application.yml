@@ -1,10 +1,12 @@
 #端口号
 server:
   port: 25000
-#  ssl:
-#    key-store: classpath:glimmer.org.cn.jks
-#    key-store-password: j95zw5d263cp0
-#    key-store-type: JKS
+  ssl:
+    key-store: classpath:recruit.www.glimmer.org.cn.pfx
+    key-store-password: t26i0il1f86
+    key-store-type: PKCS12 # pfx 类型的证书对应是 PKCS12
+    enabled: true
+    client-auth: none
 
 spring:
   datasource:
