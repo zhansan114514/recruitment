@@ -219,9 +219,9 @@ public class RankServiceImpl implements RankService {
 
     @Override
     public List<AllGradeVO> allGrade() {
-        int count=idMapper.count();
+        int count=idMapper.count();//用户数
         List<AllGradeVO> all=new ArrayList<>();
-        String[] ids=idMapper.selectAllId();
+        String[] ids=idMapper.selectAllId();//所有用户的ID
         for(int i=0;i<count;++i){
             AllGradeVO allGradeVO=new AllGradeVO();
             allGradeVO.setStudenid(ids[i]);
@@ -230,18 +230,32 @@ public class RankServiceImpl implements RankService {
 
             grade = rankMapper.selectGrade(allGradeVO.getStudenid(), SQL.C_TABLE);
             url= rankMapper.selectUrl(allGradeVO.getStudenid(),SQL.C_TABLE);
+
+            if(grade==null || url==null){
+                log.error("返回所有数据接口出错，具体出错用户：{}",allGradeVO.getStudenid()+" "+allGradeVO.getName());
+            }
+
             allGradeVO.setC(url.toUrlList(),grade.toScoreList());
 
             grade = rankMapper.selectGrade(allGradeVO.getStudenid(),SQL.JAVA_TABLE);
             url= rankMapper.selectUrl(allGradeVO.getStudenid(),SQL.JAVA_TABLE);
+            if(grade==null || url==null){
+                log.error("返回所有数据接口出错，具体出错用户：{}",allGradeVO.getStudenid()+" "+allGradeVO.getName());
+            }
             allGradeVO.setJava(url.toUrlList().toArray(new String[url.toUrlList().size()]),grade.toScoreList().toArray(new Integer[grade.toScoreList().size()]));
 
             grade = rankMapper.selectGrade(allGradeVO.getStudenid(),SQL.WEB_TABLE);
             url= rankMapper.selectUrl(allGradeVO.getStudenid(),SQL.WEB_TABLE);
+            if(grade==null || url==null){
+                log.error("返回所有数据接口出错，具体出错用户：{}",allGradeVO.getStudenid()+" "+allGradeVO.getName());
+            }
             allGradeVO.setWeb(url.toUrlList().toArray(new String[url.toUrlList().size()]),grade.toScoreList().toArray(new Integer[grade.toScoreList().size()]));
 
             grade = rankMapper.selectGrade(allGradeVO.getStudenid(),SQL.ML_TABLE);
             url= rankMapper.selectUrl(allGradeVO.getStudenid(),SQL.ML_TABLE);
+            if(grade==null || url==null){
+                log.error("返回所有数据接口出错，具体出错用户：{}",allGradeVO.getStudenid()+" "+allGradeVO.getName());
+            }
             allGradeVO.setMl(url.toUrlList().toArray(new String[url.toUrlList().size()]),grade.toScoreList().toArray(new Integer[grade.toScoreList().size()]));
 
             all.add(allGradeVO);
