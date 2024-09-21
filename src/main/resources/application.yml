@@ -1,12 +1,12 @@
 #端口号
 server:
-  port: 25000
-  ssl:
-    key-store: classpath:recruit.www.glimmer.org.cn.pfx
-    key-store-password: t26i0il1f86
-    key-store-type: PKCS12 # pfx 类型的证书对应是 PKCS12
-    enabled: true
-    client-auth: none
+  port: 24999
+#  ssl:
+#    key-store: classpath:recruit.www.glimmer.org.cn.pfx
+#    key-store-password: t26i0il1f86
+#    key-store-type: PKCS12 # pfx 类型的证书对应是 PKCS12
+#    enabled: true
+#    client-auth: none
 
 spring:
   datasource:
@@ -14,6 +14,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: newuser
     password: newpassword
+#    username: root
+#    password: 102030aoboco
   servlet:
     multipart:
       max-file-size: 20MB
@@ -30,9 +32,13 @@ spring:
           min-idle: 0
           max-wait: 100
   mail:
-    username: glimmer401@outlook.com
-    password: Glimmer!!..
-    host: smtp.office365.com
+#    username: glimmer401@outlook.com
+#    password: Glimmer!!..
+#    host: smtp.office365.com
+    username: glimmer@mcyou.cc
+    password: Glimmernb!
+    host: smtp.mxhichina.com
+
     properties:
       mail:
         smtp:
@@ -40,12 +46,12 @@ spring:
           starttls:
             enable: true
             required: true
-#          ssl:
-#            enable: true
-#          socketFactory:
-#            class: javax.net.ssl.SSLSocketFactory
+          ssl:
+            enable: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
     default-encoding: utf-8
-    port: 587
+    port: 465
 
 mybatis:
   configuration:
