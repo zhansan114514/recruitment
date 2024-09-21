@@ -57,7 +57,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public void registerCode(String email) {
+    public String registerCode(String email) {
         String verifyCode = String.valueOf(new Random().nextInt(899999) + 100000);
         if (loginMapper.selectEmail(email) != null) {
             throw new MailException("该邮箱已被注册");
@@ -67,15 +67,16 @@ public class LoginServiceImpl implements LoginService {
         mailMessage.setSubject("微光账号注册");
         mailMessage.setText("您的验证码为:" + verifyCode);
         mailMessage.setTo(email);
-        mailMessage.setFrom("glimmer401@outlook.com");
+        mailMessage.setFrom("glimmer@mcyou.cc");
 
         try {
             mailSender.send(mailMessage);
             log.info("邮件发送成功");
             loginMapper.insertCode(verifyCode);
+            return "邮件发送成功";
         } catch (Exception e) {
             log.error("邮件发送失败");
-            throw new MailException("邮件发送失败,请检查邮箱地址是否正确qwq");
+            return "邮件发送失败,请检查邮箱地址是否正确qwq";
         }
     }
 }

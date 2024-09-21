@@ -68,11 +68,11 @@ public class LoginController {
     @GetMapping("/registercode")
     public Result<StatusVo> registerCode(String email) {
         log.info("获取验证码");
-        loginService.registerCode(email);
+        String msg = loginService.registerCode(email);
         StatusVo statusVo = StatusVo.builder()
                 .status(1)
                 .message("已生成验证码")
                 .build();
-        return Result.success("成功",statusVo);
+        return Result.success(msg,statusVo);
     }
 }
