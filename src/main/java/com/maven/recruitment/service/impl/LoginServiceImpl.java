@@ -69,14 +69,14 @@ public class LoginServiceImpl implements LoginService {
         mailMessage.setTo(email);
         mailMessage.setFrom("glimmer@mcyou.cc");
 
-        try {
+//        try {
             mailSender.send(mailMessage);
             log.info("邮件发送成功");
             loginMapper.insertCode(verifyCode);
             return "邮件发送成功";
-        } catch (Exception e) {
-            log.error("邮件发送失败");
-            return "邮件发送失败,请检查邮箱地址是否正确qwq";
-        }
+//        } catch (Exception e) {
+//            log.error("邮件发送失败");
+//            return "邮件发送失败,请检查邮箱地址是否正确qwq";
+//        }
     }
 }
